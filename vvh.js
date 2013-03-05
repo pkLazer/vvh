@@ -14,7 +14,7 @@ function drawVVH(var1) {
 
 
 //grid width and height
-var bw = 399;
+var bw = 400;
 var bh = 400;
 //padding around grid
 var p = 0;
