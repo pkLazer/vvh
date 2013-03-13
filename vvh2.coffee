@@ -25,8 +25,8 @@ window.drawVVH = (canvas, moveList) ->
 	  i = 0
 	  while i <= maxW/2
 	    if i % (cmax) is 0
-	   	  ctx.fillText i, (maxW/2) + i + padx, 20
-	   	  ctx.fillText i, i + padx, 20
+	   	  ctx.fillText i, maxW - i - padx, 20		# right player
+	   	  ctx.fillText i, i + padx, 20				# left player
 	    i++
 	xlabel()
 

@@ -28,7 +28,7 @@
       _results = [];
       while (i <= maxW / 2) {
         if (i % cmax === 0) {
-          ctx.fillText(i, (maxW / 2) + i + padx, 20);
+          ctx.fillText(i, maxW - i - padx, 20);
           ctx.fillText(i, i + padx, 20);
         }
         _results.push(i++);
