@@ -1,53 +1,29 @@
 window.drawVVH = (canvas, moveList) ->
 	console.log moveList
+	c = document.getElementById(canvas)
 
-	#this.rs = rs; // remoteness spacing
-	#this.ts = ts; // turn spacing
-	#this.ds = ds; // dot size
-	#this.ls = ls; // line size
-	#this.xs = xs; // x-label interval
-	#this.ys = ys; // y-label interval
-	#this.win = win; // win color
-	#this.tie = tie; // tie color
-	#this.lose = lose; // lose color
-	#this.line = line; // grid color
-	#this.back = back; // background color
+	maxH = c.height
+	maxW = c.width
+	xs = 20					# x-label interval
+	ys = 20					# y-lable interval
+	rmax = 20				# row spacing
 
+	ctx = c.getContext("2d")
+	ctx.fillStyle = "black"
+	ctx.fillRect 0, 0, maxW, maxH
 
-
-
-
-	Draw the Horizontal Axis Label
-	xlabel = ->
-	  ctx = canvas.getContext("2d")
+	xlabel = ->				# labels the turn number
+	  ctx = c.getContext("2d")
 	  ctx.textBaseline = "middle"
 	  ctx.textAlign = "center"
-	  ctx.fillStyle = "red"				# vvh.line		
-	  i = undefined
-	  x = undefined
-	  ctx.fillText "D", canvas.width / 2, vvh.ts * 2
+	  ctx.fillStyle = "white"	
+	  ctx.fillText "D", canvas.width / 2, 10 * 2
 	  i = 0
-	  while i <= rmax
-	    if i % (5 * vvh.xs) is 0
-	      ctx.fillText i, canvas.width / 2 + vvh.rs * (rmax + 1 - i), vvh.ts * 2
-	      ctx.fillText i, canvas.width / 2 - vvh.rs * (rmax + 1 - i), vvh.ts * 2
-	    i++
+	  while i <= maxW
+	    if i % (rmax) is 0
+	   	  ctx.fillText i, (maxW/2) - i , 20
+	   	  ctx.fillText i, (maxW/2) + i, 20
+	    i += xs
 	xlabel()
 
 
-	# Draw the Vertical Axis Label
-	ylabel = ->
-	  ctx = canvas.getContext("2d")
-	  ctx.textBaseline = "middle"
-	  ctx.textAlign = "center"
-	  ctx.fillStyle = vvh.line
-	  i = undefined
-	  y = undefined
-	  i = 0
-	  while i < (canvas.height - vvh.ts * 3) / vvh.ts
-	    if i % vvh.ys is 0
-	      y = i
-	      ctx.fillText y, canvas.width / 2 - (rmax + 1) * vvh.rs - 10, vvh.ts * (i + 3)
-	      ctx.fillText y, canvas.width / 2 + (rmax + 1) * vvh.rs + 10, vvh.ts * (i + 3)
-	    i++
-	ylabel()

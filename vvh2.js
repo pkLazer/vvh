@@ -2,51 +2,36 @@
 (function() {
 
   window.drawVVH = function(canvas, moveList) {
-    var xlabel, ylabel;
+    var c, ctx, maxH, maxW, rmax, xlabel, xs, ys;
     console.log(moveList);
-    Draw(the(Horizontal(Axis(Label))));
+    c = document.getElementById(canvas);
+    maxH = c.height;
+    maxW = c.width;
+    xs = 20;
+    ys = 20;
+    rmax = 20;
+    ctx = c.getContext("2d");
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, maxW, maxH);
     xlabel = function() {
-      var ctx, i, x, _results;
-      ctx = canvas.getContext("2d");
+      var i, _results;
+      ctx = c.getContext("2d");
       ctx.textBaseline = "middle";
       ctx.textAlign = "center";
-      ctx.fillStyle = "red";
-      i = void 0;
-      x = void 0;
-      ctx.fillText("D", canvas.width / 2, vvh.ts * 2);
+      ctx.fillStyle = "white";
+      ctx.fillText("D", canvas.width / 2, 10 * 2);
       i = 0;
       _results = [];
-      while (i <= rmax) {
-        if (i % (5 * vvh.xs) === 0) {
-          ctx.fillText(i, canvas.width / 2 + vvh.rs * (rmax + 1 - i), vvh.ts * 2);
-          ctx.fillText(i, canvas.width / 2 - vvh.rs * (rmax + 1 - i), vvh.ts * 2);
+      while (i <= maxW) {
+        if (i % rmax === 0) {
+          ctx.fillText(i, (maxW / 2) - i, 20);
+          ctx.fillText(i, (maxW / 2) + i, 20);
         }
-        _results.push(i++);
+        _results.push(i += xs);
       }
       return _results;
     };
-    xlabel();
-    ylabel = function() {
-      var ctx, i, y, _results;
-      ctx = canvas.getContext("2d");
-      ctx.textBaseline = "middle";
-      ctx.textAlign = "center";
-      ctx.fillStyle = vvh.line;
-      i = void 0;
-      y = void 0;
-      i = 0;
-      _results = [];
-      while (i < (canvas.height - vvh.ts * 3) / vvh.ts) {
-        if (i % vvh.ys === 0) {
-          y = i;
-          ctx.fillText(y, canvas.width / 2 - (rmax + 1) * vvh.rs - 10, vvh.ts * (i + 3));
-          ctx.fillText(y, canvas.width / 2 + (rmax + 1) * vvh.rs + 10, vvh.ts * (i + 3));
-        }
-        _results.push(i++);
-      }
-      return _results;
-    };
-    return ylabel();
+    return xlabel();
   };
 
 }).call(this);
