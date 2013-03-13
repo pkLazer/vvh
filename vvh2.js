@@ -2,14 +2,18 @@
 (function() {
 
   window.drawVVH = function(canvas, moveList) {
-    var c, ctx, maxH, maxW, rmax, xlabel, xs, ys;
+    var c, cmax, ctx, maxH, maxW, moveNum, padx, pady, rmax, xlabel, xs, ylabel, ys;
     console.log(moveList);
     c = document.getElementById(canvas);
     maxH = c.height;
     maxW = c.width;
-    xs = 20;
+    xs = 10;
     ys = 20;
+    cmax = 30;
     rmax = 20;
+    moveNum = 0;
+    padx = 15;
+    pady = 5;
     ctx = c.getContext("2d");
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, maxW, maxH);
@@ -19,19 +23,39 @@
       ctx.textBaseline = "middle";
       ctx.textAlign = "center";
       ctx.fillStyle = "white";
-      ctx.fillText("D", canvas.width / 2, 10 * 2);
+      ctx.fillText("D", canvas.width / 2, 20);
       i = 0;
       _results = [];
-      while (i <= maxW) {
-        if (i % rmax === 0) {
-          ctx.fillText(i, (maxW / 2) - i, 20);
-          ctx.fillText(i, (maxW / 2) + i, 20);
+      while (i <= maxW / 2) {
+        if (i % cmax === 0) {
+          ctx.fillText(i, (maxW / 2) + i + padx, 20);
+          ctx.fillText(i, i + padx, 20);
         }
-        _results.push(i += xs);
+        _results.push(i++);
       }
       return _results;
     };
-    return xlabel();
+    xlabel();
+    ylabel = function() {
+      var i, y, _results;
+      ctx = c.getContext("2d");
+      ctx.textBaseline = "middle";
+      ctx.textAlign = "center";
+      ctx.fillStyle = "white";
+      i = 0;
+      y = 0;
+      _results = [];
+      while (i < (maxH * 3)) {
+        if (i % ys === 0) {
+          y = i;
+          ctx.fillText(y, pady, 10 * (i + 3));
+          ctx.fillText(y, maxW - pady, 10 * (i + 3));
+        }
+        _results.push(i++);
+      }
+      return _results;
+    };
+    return ylabel();
   };
 
 }).call(this);
